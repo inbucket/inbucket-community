@@ -8,6 +8,6 @@ $ helm repo add inbucket https://inbucket.github.io/inbucket-community
 
 ## Charts
 
-### In
+### Inbucket
 
 For installation and upgrading instructions see [Inbucket chart readme](TBD).
