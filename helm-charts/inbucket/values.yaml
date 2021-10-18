@@ -1,6 +1,6 @@
 image:
   repository: inbucket/inbucket
-  tag: stable
+  tag: 3.0.0@sha256:1f10a0efea694592c06799c729aee1d6d71c9a4f72b73031d4a426ef5f26dfc1
   pullPolicy: Always
 
 service:

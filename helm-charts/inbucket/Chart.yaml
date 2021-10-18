@@ -1,8 +1,9 @@
 apiVersion: v2
 description: Inbucket is an email testing application
 name: inbucket
-appVersion: stable
-version: 1.0.0
+type: application
+appVersion: 3.0.0
+version: 2.0.0
 keywords:
   - inbucket
   - mail
@@ -17,3 +18,6 @@ sources:
 maintainers:
   - name: cpanato
     email: ctadeu@gmail.com
+
+annotations:
+  artifacthub.io/license: MIT
