@@ -1,6 +1,32 @@
 apiVersion: v1
 entries:
   inbucket:
+  - annotations:
+      artifacthub.io/license: MIT
+    apiVersion: v2
+    appVersion: 3.0.0
+    created: "2021-10-18T16:01:11.911279705Z"
+    description: Inbucket is an email testing application
+    digest: 0807d4d37154d2ae2a89ab2cca749b281eb576bf83c9ae1e031027f4b92650ce
+    home: https://www.inbucket.org/
+    keywords:
+    - inbucket
+    - mail
+    - smtp
+    - pop3
+    - email
+    - testing
+    - disposable webmail
+    maintainers:
+    - email: ctadeu@gmail.com
+      name: cpanato
+    name: inbucket
+    sources:
+    - https://github.com/inbucket/inbucket
+    type: application
+    urls:
+    - https://github.com/inbucket/inbucket-community/releases/download/inbucket-2.0.0/inbucket-2.0.0.tgz
+    version: 2.0.0
   - apiVersion: v2
     appVersion: stable
     created: "2021-07-14T11:24:40.269562163Z"
@@ -24,4 +50,4 @@ entries:
     urls:
     - https://github.com/inbucket/inbucket-community/releases/download/inbucket-1.0.0/inbucket-1.0.0.tgz
     version: 1.0.0
-generated: "2021-07-14T11:24:40.269567663Z"
+generated: "2021-10-18T16:01:11.911287705Z"
