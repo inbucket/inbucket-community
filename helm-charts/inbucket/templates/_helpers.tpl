@@ -41,3 +41,31 @@ Create the name for the tls secret.
         {{- template "inbucket.fullname" . -}}-tls
     {{- end -}}
 {{- end -}}
+
+
+{{/*
+Return the appropriate apiVersion for ingress.
+*/}}
+{{- define "inbucket.ingress.apiVersion" -}}
+  {{- if and (.Capabilities.APIVersions.Has "networking.k8s.io/v1") (semverCompare ">= 1.19-0" .Capabilities.KubeVersion.Version) -}}
+      {{- print "networking.k8s.io/v1" -}}
+  {{- else if .Capabilities.APIVersions.Has "networking.k8s.io/v1beta1" -}}
+    {{- print "networking.k8s.io/v1beta1" -}}
+  {{- else -}}
+    {{- print "extensions/v1beta1" -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Return if ingress is stable.
+*/}}
+{{- define "inbucket.ingress.isStable" -}}
+  {{- eq (include "inbucket.ingress.apiVersion" .) "networking.k8s.io/v1" -}}
+{{- end -}}
+
+{{/*
+Return if ingress supports pathType.
+*/}}
+{{- define "inbucket.ingress.supportsPathType" -}}
+  {{- or (eq (include "inbucket.ingress.isStable" .) "true") (and (eq (include "inbucket.ingress.apiVersion" .) "networking.k8s.io/v1beta1") (semverCompare ">= 1.18-0" .Capabilities.KubeVersion.Version)) -}}
+{{- end -}}
