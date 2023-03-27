@@ -10,13 +10,23 @@ service:
   loadBalancerSourceRanges: []
   type: ClusterIP
   port:
-    http: 9000
     smtp: 2500
     pop3: 1100
   nodePort:
-    http: ""
     smtp: ""
     pop3: ""
+
+admin:
+  service:
+    annotations: {}
+    externalIPs: []
+    loadBalancerIP: ""
+    loadBalancerSourceRanges: []
+    type: ClusterIP
+    port:
+      http: 9000
+    nodePort:
+      http: ""
 
 extraEnv:
   INBUCKET_LOGLEVEL: "info"

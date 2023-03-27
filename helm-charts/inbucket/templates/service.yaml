@@ -26,13 +26,6 @@ spec:
 {{ toYaml .Values.service.loadBalancerSourceRanges | indent 4 }}
 {{- end }}
   ports:
-    - name: http
-      port: {{ .Values.service.port.http }}
-      protocol: TCP
-      targetPort: http
-      {{- if (and (eq .Values.service.type "NodePort") (not (empty .Values.service.nodePort.http))) }}
-      nodePort: {{ .Values.service.nodePort.http }}
-      {{- end }}
     - name: smtp
       port: {{ .Values.service.port.smtp }}
       protocol: TCP

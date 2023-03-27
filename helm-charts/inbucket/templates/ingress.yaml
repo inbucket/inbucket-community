@@ -40,11 +40,11 @@ spec:
           backend:
             {{- if $ingressApiIsStable }}
             service:
-              name: {{ $fullName }}
+              name: {{ $fullName }}-admin
               port:
                 name: http
             {{- else }}
-            serviceName: {{ $fullName }}
+            serviceName: {{ $fullName }}-admin
             servicePort: http
             {{- end }}
         {{- end }}

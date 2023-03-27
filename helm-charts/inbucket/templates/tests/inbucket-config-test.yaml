@@ -10,5 +10,5 @@ metadata:
 data:
   run.sh: |-
     @test "Testing Inbucket is accessible" {
-      curl --retry 48 --retry-delay 10 {{ include "inbucket.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port.http }}
+      curl --retry 48 --retry-delay 10 {{ include "inbucket.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.admin.service.port.http }}
     }

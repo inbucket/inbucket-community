@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+{{- if .Values.admin.service.annotations }}
+  annotations:
+{{ toYaml .Values.admin.service.annotations | indent 4 }}
+{{- end }}
+  labels:
+    app.kubernetes.io/name: {{ include "inbucket.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "inbucket.chart" . }}
+  name: {{ include "inbucket.fullname" . }}-admin
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: "{{ .Values.admin.service.type }}"
+{{- if .Values.admin.service.externalIPs }}
+  externalIPs:
+{{ toYaml .Values.admin.service.externalIPs | indent 4 }}
+{{- end }}
+{{- if .Values.admin.service.loadBalancerIP }}
+  loadBalancerIP: "{{ .Values.admin.service.loadBalancerIP }}"
+{{- end }}
+{{- if .Values.admin.service.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges:
+{{ toYaml .Values.admin.service.loadBalancerSourceRanges | indent 4 }}
+{{- end }}
+  ports:
+    - name: http
+      port: {{ .Values.admin.service.port.http }}
+      protocol: TCP
+      targetPort: http
+      {{- if (and (eq .Values.admin.service.type "NodePort") (not (empty .Values.admin.service.nodePort.http))) }}
+      nodePort: {{ .Values.admin.service.nodePort.http }}
+      {{- end }}
+  selector:
+    app.kubernetes.io/name: {{ include "inbucket.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
