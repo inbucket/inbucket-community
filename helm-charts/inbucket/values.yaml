@@ -56,6 +56,7 @@ extraEnv:
 
 ingress:
   enabled: false
+  #className: your-custom-ingress-class
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
