@@ -3,7 +3,7 @@ description: Disposable webmail server (similar to Mailinator) with built in SMT
 name: inbucket
 type: application
 appVersion: 3.0.0
-version: 2.2.0
+version: 2.2.1
 keywords:
   - inbucket
   - mail
