@@ -6,7 +6,7 @@ If you'd like to test your instance, forward the ports locally:
 Web UI:
 =======
 
-export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ include "inbucket.name" . }},release={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "inbucket.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward --namespace {{ .Release.Namespace }} $POD_NAME {{ .Values.service.port.http }}
 
 or
@@ -16,7 +16,7 @@ kubectl port-forward --namespace {{ .Release.Namespace }} service/{{ include "in
 SMTP Server:
 ============
 
-export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ include "inbucket.name" . }},release={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "inbucket.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward --namespace {{ .Release.Namespace }} $POD_NAME {{ .Values.service.port.smtp }}
 
 or
@@ -26,7 +26,7 @@ kubectl port-forward --namespace {{ .Release.Namespace }} service/{{ include "in
 POP3 Server:
 ============
 
-export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ include "inbucket.name" . }},release={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "inbucket.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward --namespace {{ .Release.Namespace }} $POD_NAME {{ .Values.service.port.pop3 }}
 
 or
