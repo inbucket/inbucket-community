@@ -54,7 +54,23 @@ spec:
             timeoutSeconds: 5
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+        {{- if .Values.persistence.enabled }}
+          volumeMounts:
+            - mountPath: {{ .Values.persistence.path }}
+              name: {{ include "inbucket.fullname" . }}
+              readOnly: false
+        {{- end }}
     {{- if .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 6 }}
+    {{- end }}
+    {{- if .Values.persistence.enabled }}
+      volumes:
+        - name: {{ include "inbucket.fullname" . }}
+          persistentVolumeClaim:
+            claimName: {{ include "inbucket.fullname" . }}
     {{- end }}
