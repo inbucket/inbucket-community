@@ -1,4 +1,4 @@
-{{- if .Values.persistence.enabled }}
+{{- if eq (include "inbucket.persistenceEnabled" .) "true" }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -10,7 +10,7 @@ metadata:
     helm.sh/chart: {{ include "inbucket.chart" . }}
 spec:
   accessModes:
-    - {{ .Values.persistence.accessMode }}
+    - {{ default .Values.persistence.accessMode "ReadWriteOnce" }}
   resources:
     requests:
       storage: {{ .Values.persistence.size }}
