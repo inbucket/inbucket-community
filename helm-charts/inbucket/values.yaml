@@ -74,3 +74,10 @@ ingress:
 
 podAnnotations: {}
 resources: {}
+
+persistence:
+  enabled: false
+  path: /storage
+  size: 1Gi
+  className:
+  accessMode: ReadWriteOnce

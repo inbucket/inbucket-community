@@ -69,3 +69,10 @@ Return if ingress supports pathType.
 {{- define "inbucket.ingress.supportsPathType" -}}
   {{- or (eq (include "inbucket.ingress.isStable" .) "true") (and (eq (include "inbucket.ingress.apiVersion" .) "networking.k8s.io/v1beta1") (semverCompare ">= 1.18-0" .Capabilities.KubeVersion.Version)) -}}
 {{- end -}}
+
+{{/*
+Return if persistence is enabled.
+*/}}
+{{- define "inbucket.persistenceEnabled" -}}
+  {{- and ( and ( hasKey .Values "persistence" ) ( hasKey .Values.persistence "enabled" ) ) ( eq .Values.persistence.enabled true ) -}}
+{{- end -}}

@@ -1,3 +1,4 @@
+{{- $persistence := eq (include "inbucket.persistenceEnabled" .) "true" -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -54,7 +55,23 @@ spec:
             timeoutSeconds: 5
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+        {{- if $persistence }}
+          volumeMounts:
+            - mountPath: {{ .Values.persistence.path }}
+              name: {{ include "inbucket.fullname" . }}
+              readOnly: false
+        {{- end }}
     {{- if .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 6 }}
+    {{- end }}
+    {{- if $persistence}}
+      volumes:
+        - name: {{ include "inbucket.fullname" . }}
+          persistentVolumeClaim:
+            claimName: {{ include "inbucket.fullname" . }}
     {{- end }}
