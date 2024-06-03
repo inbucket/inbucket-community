@@ -12,7 +12,7 @@ metadata:
 spec:
   containers:
     - name: {{ .Release.Name }}-test
-      image: "bats/bats"
+      image: "bats/bats:v1.10.0@sha256:33d5909905442e39afdb29af693516f213ace6b8100045d408475d5bd15196cb"
       command:
       - "bash"
       - "-c"
