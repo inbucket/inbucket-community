@@ -9,6 +9,10 @@ service:
   loadBalancerIP: ""
   loadBalancerSourceRanges: []
   type: ClusterIP
+  portName:
+    http: http
+    smtp: smtp
+    pop3: pop3
   port:
     http: 9000
     smtp: 2500

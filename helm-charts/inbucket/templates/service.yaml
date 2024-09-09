@@ -26,21 +26,21 @@ spec:
 {{ toYaml .Values.service.loadBalancerSourceRanges | indent 4 }}
 {{- end }}
   ports:
-    - name: http
+    - name: {{ .Values.service.portName.pop3 }}
       port: {{ .Values.service.port.http }}
       protocol: TCP
       targetPort: http
       {{- if (and (eq .Values.service.type "NodePort") (not (empty .Values.service.nodePort.http))) }}
       nodePort: {{ .Values.service.nodePort.http }}
       {{- end }}
-    - name: smtp
+    - name: {{ .Values.service.portName.smtp }}
       port: {{ .Values.service.port.smtp }}
       protocol: TCP
       targetPort: smtp
       {{- if (and (eq .Values.service.type "NodePort") (not (empty .Values.service.nodePort.smtp))) }}
       nodePort: {{ .Values.service.nodePort.smtp }}
       {{- end }}
-    - name: pop3
+    - name: {{ .Values.service.portName.pop3 }}
       port: {{ .Values.service.port.pop3 }}
       protocol: TCP
       targetPort: pop3
