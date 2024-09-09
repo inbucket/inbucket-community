@@ -26,7 +26,7 @@ spec:
 {{ toYaml .Values.service.loadBalancerSourceRanges | indent 4 }}
 {{- end }}
   ports:
-    - name: {{ .Values.service.portName.pop3 }}
+    - name: {{ .Values.service.portName.http }}
       port: {{ .Values.service.port.http }}
       protocol: TCP
       targetPort: http
