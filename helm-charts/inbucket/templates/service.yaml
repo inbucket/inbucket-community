@@ -1,3 +1,4 @@
+{{- $portNameDict := .Values.service.portName | default dict }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -26,21 +27,21 @@ spec:
 {{ toYaml .Values.service.loadBalancerSourceRanges | indent 4 }}
 {{- end }}
   ports:
-    - name: {{ .Values.service.portName.http }}
+    - name: {{ get $portNameDict "http" | default "http" }}
       port: {{ .Values.service.port.http }}
       protocol: TCP
       targetPort: http
       {{- if (and (eq .Values.service.type "NodePort") (not (empty .Values.service.nodePort.http))) }}
       nodePort: {{ .Values.service.nodePort.http }}
       {{- end }}
-    - name: {{ .Values.service.portName.smtp }}
+    - name: {{ get $portNameDict "smtp" | default "smtp" }}
       port: {{ .Values.service.port.smtp }}
       protocol: TCP
       targetPort: smtp
       {{- if (and (eq .Values.service.type "NodePort") (not (empty .Values.service.nodePort.smtp))) }}
       nodePort: {{ .Values.service.nodePort.smtp }}
       {{- end }}
-    - name: {{ .Values.service.portName.pop3 }}
+    - name: {{ get $portNameDict "pop3" | default "pop3" }}
       port: {{ .Values.service.port.pop3 }}
       protocol: TCP
       targetPort: pop3
