@@ -5,6 +5,33 @@ entries:
       artifacthub.io/license: MIT
     apiVersion: v2
     appVersion: 3.0.0
+    created: "2024-09-13T02:08:48.287611003Z"
+    description: Disposable webmail server (similar to Mailinator) with built in SMTP,
+      POP3, RESTful servers; no DB required.
+    digest: 94256ba3adc12c47d58443a311da476b60055a1cf025210e7a00598995ba8255
+    home: https://www.inbucket.org/
+    keywords:
+    - inbucket
+    - mail
+    - smtp
+    - pop3
+    - email
+    - testing
+    - disposable webmail
+    maintainers:
+    - email: ctadeu@gmail.com
+      name: cpanato
+    name: inbucket
+    sources:
+    - https://github.com/inbucket/inbucket
+    type: application
+    urls:
+    - https://github.com/inbucket/inbucket-community/releases/download/inbucket-2.4.0/inbucket-2.4.0.tgz
+    version: 2.4.0
+  - annotations:
+      artifacthub.io/license: MIT
+    apiVersion: v2
+    appVersion: 3.0.0
     created: "2024-06-04T07:34:57.868012919Z"
     description: Disposable webmail server (similar to Mailinator) with built in SMTP,
       POP3, RESTful servers; no DB required.
@@ -239,4 +266,4 @@ entries:
     urls:
     - https://github.com/inbucket/inbucket-community/releases/download/inbucket-1.0.0/inbucket-1.0.0.tgz
     version: 1.0.0
-generated: "2024-06-04T07:34:57.868048185Z"
+generated: "2024-09-13T02:08:48.287662189Z"
