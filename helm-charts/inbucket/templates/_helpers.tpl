@@ -32,6 +32,17 @@ Create chart name and version as used by the chart label.
 {{- end -}}
 
 {{/*
+Create the name for the smtp tls secret.
+*/}}
+{{- define "inbucket.smtpTlsSecret" -}}
+    {{- if .Values.inbucket.smtp.tls.secretName -}}
+        {{- .Values.inbucket.smtp.tls.secretName -}}
+    {{- else -}}
+        {{- template "inbucket.fullname" . -}}-smtp-tls
+    {{- end -}}
+{{- end -}}
+
+{{/*
 Create the name for the tls secret.
 */}}
 {{- define "inbucket.tlsSecret" -}}
@@ -75,4 +86,11 @@ Return if persistence is enabled.
 */}}
 {{- define "inbucket.persistenceEnabled" -}}
   {{- and ( and ( hasKey .Values "persistence" ) ( hasKey .Values.persistence "enabled" ) ) ( eq .Values.persistence.enabled true ) -}}
+{{- end -}}
+
+{{/*
+Return if the smtp tls secret should be mounted.
+*/}}
+{{- define "inbucket.mountSmtpTlsSecret" -}}
+  {{- and (hasKey .Values "inbucket") (hasKey .Values.inbucket "smtp") (hasKey .Values.inbucket.smtp "tls") (hasKey .Values.inbucket.smtp.tls "secretName") (ne .Values.inbucket.smtp.tls.secretName "") -}}
 {{- end -}}
