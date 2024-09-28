@@ -22,6 +22,11 @@ service:
     smtp: ""
     pop3: ""
 
+inbucket:
+  smtp:
+    tls:
+      secretName: ""
+
 extraEnv:
   INBUCKET_LOGLEVEL: "info"
   INBUCKET_MAILBOXNAMING: "local"
@@ -37,8 +42,8 @@ extraEnv:
   INBUCKET_SMTP_DISCARDDOMAINS: ""
   INBUCKET_SMTP_TIMEOUT: "300s"
   INBUCKET_SMTP_TLSENABLED: "false"
-  INBUCKET_SMTP_TLSPRIVKEY: "cert.key"
-  INBUCKET_SMTP_TLSCERT: "cert.crt"
+  INBUCKET_SMTP_TLSPRIVKEY: "/smtp-tls-secret/cert.key"
+  INBUCKET_SMTP_TLSCERT: "/smtp-tls-secret/cert.crt"
   INBUCKET_POP3_ADDR: "0.0.0.0:1100"
   INBUCKET_POP3_DOMAIN: "inbucket"
   INBUCKET_POP3_TIMEOUT: "600s"

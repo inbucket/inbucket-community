@@ -1,4 +1,6 @@
-{{- $persistence := eq (include "inbucket.persistenceEnabled" .) "true" -}}
+{{- $mountSmtpTlsSecret := eq (include "inbucket.mountSmtpTlsSecret" .) "true" -}}
+{{- $addPersistence := eq (include "inbucket.persistenceEnabled" .) "true" -}}
+{{- $addVolumes := or $addPersistence $mountSmtpTlsSecret -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -55,11 +57,18 @@ spec:
             timeoutSeconds: 5
           resources:
 {{ toYaml .Values.resources | indent 12 }}
-        {{- if $persistence }}
+        {{- if $addVolumes }}
           volumeMounts:
+            {{- if $addPersistence }}
             - mountPath: {{ .Values.persistence.path }}
               name: {{ include "inbucket.fullname" . }}
               readOnly: false
+            {{- end }}
+            {{- if $mountSmtpTlsSecret }}
+            - mountPath: "/smtp-tls-secret"
+              name: {{ include "inbucket.smtpTlsSecret" . }}
+              readOnly: true
+            {{- end }}
         {{- end }}
     {{- if .Values.nodeSelector }}
       nodeSelector:
@@ -69,9 +78,16 @@ spec:
       tolerations:
 {{ toYaml .Values.tolerations | indent 6 }}
     {{- end }}
-    {{- if $persistence}}
+    {{- if $addVolumes }}
       volumes:
+      {{- if $addPersistence }}
         - name: {{ include "inbucket.fullname" . }}
           persistentVolumeClaim:
             claimName: {{ include "inbucket.fullname" . }}
+      {{- end }}
+      {{- if $mountSmtpTlsSecret }}
+        - name: {{ include "inbucket.smtpTlsSecret" . }}
+          secret:
+            secretName: {{ include "inbucket.smtpTlsSecret" . }}
+      {{- end }}
     {{- end }}
